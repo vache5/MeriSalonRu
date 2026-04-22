@@ -1,0 +1,59 @@
+@config "../tailwind.config.ts";
+@import "tailwindcss";
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: #ffffff;
+}
+
+@layer components {
+  .container-padded {
+    @apply px-5 sm:px-8 lg:px-12;
+  }
+
+  .section-label {
+    @apply text-xs uppercase tracking-[0.18em] text-primary;
+  }
+
+  .section-title {
+    @apply mt-3 font-heading text-4xl leading-tight text-dark sm:text-5xl;
+  }
+
+  .primary-btn {
+    @apply rounded-full bg-primary px-6 py-3 text-xs uppercase tracking-[0.15em] text-dark transition duration-300 hover:scale-105 hover:bg-[#b68c64];
+  }
+
+  .secondary-btn {
+    @apply rounded-full border px-6 py-3 text-xs uppercase tracking-[0.15em] transition duration-300 hover:scale-105;
+  }
+
+  .nav-link {
+    @apply text-xs uppercase tracking-[0.14em] text-dark/85 transition hover:text-primary;
+  }
+
+  .footer-title {
+    @apply text-xs uppercase tracking-[0.14em] text-primary;
+  }
+
+  .footer-list {
+    @apply mt-4 space-y-2 text-sm text-light/72;
+  }
+
+  .floral {
+    @apply pointer-events-none absolute h-44 w-44 opacity-20;
+    background-image: url("data:image/svg+xml,%3Csvg width='120' height='120' viewBox='0 0 120 120' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%23C8A27C' stroke-width='1.5'%3E%3Cpath d='M12 86c18-8 26-21 33-37 9-20 23-34 47-42'/%3E%3Cpath d='M54 47c0 12 8 18 18 20'/%3E%3Cpath d='M40 61c-2 10-8 15-16 18'/%3E%3Ccircle cx='78' cy='22' r='7'/%3E%3Ccircle cx='59' cy='49' r='5'/%3E%3C/g%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-size: contain;
+  }
+
+  .floral-top-left {
+    @apply left-0 top-10;
+  }
+
+  .floral-bottom-right {
+    @apply bottom-10 right-0 rotate-180;
+  }
+}

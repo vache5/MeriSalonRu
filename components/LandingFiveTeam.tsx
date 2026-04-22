@@ -188,7 +188,7 @@ export default function LandingFiveTeam() {
                   </p>
                   <div className="mt-4 inline-flex items-center gap-2 rounded-full border border-[#e3c6aa] px-3 py-1 text-[11px] uppercase tracking-[0.14em] text-[#C8A27C]">
                     <RoleIcon role={master.role} />
-                    Мастер Stylen
+                    Мастер Mary
                   </div>
                 </article>
               ))}

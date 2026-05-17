@@ -17,6 +17,14 @@ const body = Inter({
 export const metadata: Metadata = {
   title: "Meri Salon | Luxury Beauty & Spa",
   description: "A premium beauty and spa landing page built with Next.js.",
+  icons: {
+    icon: [
+      { url: "/favicon.ico", sizes: "any" },
+      { url: "/favicon.png", type: "image/png", sizes: "512x512" },
+    ],
+    apple: "/apple-touch-icon.png",
+    shortcut: "/favicon.ico",
+  },
 };
 
 export default function RootLayout({

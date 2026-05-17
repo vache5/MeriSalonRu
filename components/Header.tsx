@@ -4,12 +4,6 @@ import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
-import type { SalonKey } from "@/components/FourthLanding";
-
-type HeaderProps = {
-  salon: SalonKey;
-  onSalonChange: (salon: SalonKey) => void;
-};
 
 const navItems = [
   { label: "ГЛАВНАЯ", href: "#home" },
@@ -17,14 +11,26 @@ const navItems = [
   { label: "НАШИ УСЛУГИ", href: "#services" },
   { label: "О НАС", href: "#addresses" },
 ];
+const MAX_CHANNEL_URL = "https://max.ru/join/UKql4nt2EjTfvB3tjLf_eQdc73JDijmCgTkAizkpSQM";
 
-export default function Header({ salon, onSalonChange }: HeaderProps) {
+function MaxLogo({ className }: { className?: string }) {
+  return (
+    <span
+      className={`inline-flex items-center justify-center rounded-[8px] bg-gradient-to-br from-[#79a9ff] via-[#5f8fff] to-[#3b6df1] px-2 py-1 text-[9px] font-bold tracking-[0.14em] text-white shadow-[0_6px_14px_-8px_rgba(46,85,204,0.8)] ${className ?? ""}`}
+      aria-hidden
+    >
+      MAX
+    </span>
+  );
+}
+
+export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
 
   return (
     <header className="fixed inset-x-0 top-0 z-50 border-b border-gray-100 bg-white">
       <div className="mx-auto hidden w-full max-w-[1300px] xl:block">
-        <div className="grid h-[104px] grid-cols-[190px_minmax(0,1fr)_340px] items-center gap-4 px-6 lg:px-8">
+        <div className="grid h-[104px] grid-cols-[190px_minmax(0,1fr)_auto] items-center gap-4 px-6 lg:px-8">
           <Link
             href="/"
             className="inline-flex w-[190px] items-center"
@@ -52,7 +58,7 @@ export default function Header({ salon, onSalonChange }: HeaderProps) {
             ))}
           </nav>
 
-          <div className="inline-flex w-[340px] shrink-0 items-center justify-end gap-2.5">
+          <div className="inline-flex shrink-0 items-center justify-end gap-2.5">
             <a
               href="tel:+79057747771"
               className="inline-flex h-10 shrink-0 items-center gap-2 rounded-full border border-[#e4cfb8] bg-white px-3.5 text-sm font-semibold leading-none text-[#1A1B1E] shadow-[0_10px_20px_-18px_rgba(0,0,0,0.45)] transition hover:border-[#C8A27C]"
@@ -69,31 +75,15 @@ export default function Header({ salon, onSalonChange }: HeaderProps) {
                 +7 (905) 774-77-71
               </span>
             </a>
-
-            <div className="inline-flex h-10 items-center rounded-full border border-[#e3c9ae] bg-[#fbf6f1] p-1">
-              <button
-                type="button"
-                onClick={() => onSalonChange("kryukovo")}
-                className={`inline-flex h-8 items-center rounded-full px-3.5 text-[10px] uppercase tracking-[0.1em] transition ${
-                  salon === "kryukovo"
-                    ? "bg-[#C8A27C] font-semibold text-white shadow-sm"
-                    : "text-[#9a8a79] hover:text-[#1A1B1E]"
-                }`}
-              >
-                Крюково
-              </button>
-              <button
-                type="button"
-                onClick={() => onSalonChange("istra")}
-                className={`inline-flex h-8 items-center rounded-full px-3.5 text-[10px] uppercase tracking-[0.1em] transition ${
-                  salon === "istra"
-                    ? "bg-[#C8A27C] font-semibold text-white shadow-sm"
-                    : "text-[#9a8a79] hover:text-[#1A1B1E]"
-                }`}
-              >
-                Истра
-              </button>
-            </div>
+            <a
+              href={MAX_CHANNEL_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex h-10 shrink-0 items-center gap-1.5 rounded-full border border-[#8aa9ff]/45 bg-[#eef4ff] px-3 text-[11px] font-semibold uppercase tracking-[0.08em] text-[#35519e] transition hover:border-[#6d95ff]/60 hover:bg-[#e5eeff]"
+            >
+              <MaxLogo />
+              <span>MAX · JOIN</span>
+            </a>
           </div>
         </div>
       </div>
@@ -154,16 +144,17 @@ export default function Header({ salon, onSalonChange }: HeaderProps) {
                   {item.label}
                 </a>
               ))}
-              <div className="mt-2 flex gap-4 text-xs uppercase tracking-[0.12em] text-[#C8A27C]">
-                <button onClick={() => onSalonChange("kryukovo")}>
-                  Крюково
-                </button>
-                <button onClick={() => onSalonChange("istra")}>
-                  Истра
-                </button>
-              </div>
               <a href="tel:+79057747771" className="pt-4 text-[#C8A27C]">
                 +7 (905) 774-77-71
+              </a>
+              <a
+                href={MAX_CHANNEL_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 text-[#8fb0ff]"
+              >
+                <MaxLogo />
+                <span className="text-xs uppercase tracking-[0.12em]">MAX · Перейти в канал</span>
               </a>
               <button className="mt-4 rounded-md bg-[#C8A27C] px-6 py-3 text-xs tracking-[0.15em] text-white">
                 ЗАПИСАТЬСЯ

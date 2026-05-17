@@ -32,6 +32,28 @@ export type Testimonial = {
   title: string;
 };
 
+export type GalleryPhoto = {
+  src: string;
+  alt: string;
+};
+
+export const galleryPhotos: GalleryPhoto[] = [
+  { src: "/images/gallery/gallery-01.jpg", alt: "Салон Mary — интерьер" },
+  { src: "/images/gallery/gallery-02.jpg", alt: "Парикмахерская зона" },
+  { src: "/images/gallery/gallery-03.jpg", alt: "Рабочее место мастера" },
+  { src: "/images/gallery/gallery-04.jpg", alt: "Атмосфера салона" },
+  { src: "/images/gallery/gallery-05.jpg", alt: "Зона ожидания" },
+  { src: "/images/gallery/gallery-06.jpg", alt: "Салон красоты Mary" },
+  { src: "/images/gallery/gallery-07.jpg", alt: "Детали интерьера" },
+  { src: "/images/gallery/gallery-08.jpg", alt: "Процедуры в салоне" },
+  { src: "/images/gallery/gallery-09.jpg", alt: "Mary Salon — пространство" },
+  { src: "/images/gallery/gallery-10.jpg", alt: "Мастера за работой" },
+  { src: "/images/gallery/gallery-11.jpg", alt: "Уютный интерьер салона" },
+  { src: "/images/gallery/gallery-12.jpg", alt: "Салон Mary — атмосфера" },
+  { src: "/images/gallery/gallery-13.jpg", alt: "Зона красоты и ухода" },
+  { src: "/images/gallery/gallery-14.jpg", alt: "Meri Salon — наш салон" },
+];
+
 export const navLinks = [
   { label: "Услуги", href: "#services" },
   { label: "Цены", href: "#pricing" },
@@ -44,26 +66,22 @@ export const services: Service[] = [
   {
     title: "Уход за волосами",
     description: "Профессиональные стрижки, укладки и восстановление волос.",
-    image:
-      "https://images.unsplash.com/photo-1560066984-138dadb4c035?auto=format&fit=crop&w=1000&q=80",
+    image: "/images/service-hair.png",
   },
   {
-    title: "Ногтевой сервис",
+    title: "Ногтевой уход",
     description: "Авторский маникюр и spa-педикюр с идеальным покрытием.",
-    image:
-      "https://images.unsplash.com/photo-1604654894610-df63bc536371?auto=format&fit=crop&w=1000&q=80",
+    image: "/images/service-nails.png",
   },
   {
     title: "Косметология",
     description: "Современные процедуры косметологии для свежего и ухоженного образа.",
-    image:
-      "https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?auto=format&fit=crop&w=1000&q=80",
+    image: "/images/service-cosmetology.png",
   },
   {
     title: "Барбершоп",
     description: "Стрижки, оформление бороды и мужской уход в стиле премиум.",
-    image:
-      "https://images.unsplash.com/photo-1544161515-4ab6ce6db874?auto=format&fit=crop&w=1000&q=80",
+    image: "/images/service-barbershop.png",
   },
 ];
 

@@ -2,6 +2,18 @@ import Image from "next/image";
 import Link from "next/link";
 
 const menuItems = ["ГЛАВНАЯ", "СПЕЦИАЛИСТЫ", "НАШИ УСЛУГИ", "О НАС"];
+const MAX_CHANNEL_URL = "https://max.ru/join/UKql4nt2EjTfvB3tjLf_eQdc73JDijmCgTkAizkpSQM";
+
+function MaxLogo({ className }: { className?: string }) {
+  return (
+    <span
+      className={`inline-flex items-center justify-center rounded-[10px] bg-gradient-to-br from-[#79a9ff] via-[#5f8fff] to-[#3b6df1] px-2.5 py-1.5 text-[10px] font-bold tracking-[0.14em] text-white shadow-[0_6px_14px_-8px_rgba(46,85,204,0.8)] ${className ?? ""}`}
+      aria-hidden
+    >
+      MAX
+    </span>
+  );
+}
 
 export default function Footer() {
   return (
@@ -51,8 +63,18 @@ export default function Footer() {
           <ul className="mt-5 space-y-3 text-sm text-white/80">
             <li>+7 (905) 774-77-71</li>
             <li>merisalon.info@mail.ru</li>
-            <li>Instagram / Telegram / WhatsApp</li>
             <li>Московская область</li>
+            <li className="pt-1">
+              <a
+                href={MAX_CHANNEL_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 rounded-full border border-[#8aa9ff]/45 bg-[#233053]/45 px-3 py-1.5 text-xs font-medium text-[#dce7ff] transition hover:border-[#8aa9ff]/70 hover:bg-[#2a3962]/60"
+              >
+                <MaxLogo />
+                <span className="uppercase tracking-[0.08em]">СК «Мери» · @join</span>
+              </a>
+            </li>
           </ul>
         </div>
 
@@ -61,7 +83,6 @@ export default function Footer() {
           <ul className="mt-5 space-y-3 text-sm text-white/80">
             <li>Пн - Сб: 10:00 - 21:00</li>
             <li>Воскресенье: 10:00 - 20:00</li>
-            <li>По предварительной записи</li>
           </ul>
         </div>
       </div>

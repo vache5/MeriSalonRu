@@ -4,10 +4,6 @@ import { motion } from "framer-motion";
 import { useState } from "react";
 import type { SalonKey } from "@/components/FourthLanding";
 
-type AddressLandingProps = {
-  salon: SalonKey;
-};
-
 const salonData: Record<
   SalonKey,
   {
@@ -30,8 +26,8 @@ const salonData: Record<
   },
 };
 
-export default function LandingLastAddresses({ salon }: AddressLandingProps) {
-  const [activeSalon, setActiveSalon] = useState<SalonKey>(salon);
+export default function LandingLastAddresses() {
+  const [activeSalon, setActiveSalon] = useState<SalonKey>("kryukovo");
   const active = salonData[activeSalon];
 
   return (

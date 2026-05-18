@@ -1,12 +1,52 @@
 @config "../tailwind.config.ts";
 @import "tailwindcss";
 
+:root {
+  --scrollbar-track: #f0ebe4;
+  --scrollbar-thumb: #c8a27c;
+  --scrollbar-thumb-hover: #a67c52;
+}
+
 html {
   scroll-behavior: smooth;
+  scrollbar-width: thin;
+  scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);
 }
 
 body {
   background: #ffffff;
+}
+
+/* Brand scrollbars — page + all scrollable areas */
+html,
+body,
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);
+}
+
+*::-webkit-scrollbar {
+  width: 7px;
+  height: 7px;
+}
+
+*::-webkit-scrollbar-track {
+  background: var(--scrollbar-track);
+  border-radius: 999px;
+}
+
+*::-webkit-scrollbar-thumb {
+  border-radius: 999px;
+  background: linear-gradient(180deg, #e8d4bc, var(--scrollbar-thumb));
+  border: 1px solid var(--scrollbar-track);
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #d4b896, var(--scrollbar-thumb-hover));
+}
+
+*::-webkit-scrollbar-corner {
+  background: var(--scrollbar-track);
 }
 
 @layer components {
@@ -20,6 +60,10 @@ body {
 
   .section-title {
     @apply mt-3 font-heading text-4xl leading-tight text-dark sm:text-5xl;
+  }
+
+  .section-heading {
+    @apply font-body text-4xl font-semibold uppercase tracking-wide text-[#1A1B1E] sm:text-5xl;
   }
 
   .primary-btn {
@@ -56,4 +100,5 @@ body {
   .floral-bottom-right {
     @apply bottom-10 right-0 rotate-180;
   }
+
 }

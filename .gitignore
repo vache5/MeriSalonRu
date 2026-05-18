@@ -19,6 +19,10 @@
 
 # production
 /build
+/release
+/upload
+/merisalon-release.zip
+/merisalon-cloudlinux.zip
 
 # misc
 .DS_Store

@@ -1,7 +1,14 @@
 import Image from "next/image";
 import Link from "next/link";
+import { IconClock, IconMail, IconMapPin, IconPhone, NavIcon, type NavIconKey } from "@/components/icons";
+import { assetSrc } from "@/lib/asset";
 
-const menuItems = ["ГЛАВНАЯ", "СПЕЦИАЛИСТЫ", "НАШИ УСЛУГИ", "О НАС"];
+const menuItems: { label: string; href: string; icon: NavIconKey }[] = [
+  { label: "ГЛАВНАЯ", href: "#home", icon: "home" },
+  { label: "СПЕЦИАЛИСТЫ", href: "#specialists", icon: "specialists" },
+  { label: "НАШИ УСЛУГИ", href: "#services", icon: "services" },
+  { label: "О НАС", href: "#addresses", icon: "about" },
+];
 const MAX_CHANNEL_URL = "https://max.ru/join/UKql4nt2EjTfvB3tjLf_eQdc73JDijmCgTkAizkpSQM";
 
 function MaxLogo({ className }: { className?: string }) {
@@ -24,13 +31,13 @@ export default function Footer() {
 
       <div className="mx-auto grid w-full max-w-[1300px] grid-cols-1 gap-10 px-6 py-16 md:grid-cols-2 xl:grid-cols-[1.25fr_1fr_1fr_1fr]">
         <div>
-          <Link href="/" className="inline-flex items-center" aria-label="Meri Salon">
+          <Link href="/" className="inline-flex items-center" aria-label="Mary Salon">
             <Image
-              src="/images/mary-logo.png"
-              alt="Meri Salon logo"
-              width={220}
-              height={64}
-              className="h-auto w-[180px] object-contain"
+              src={assetSrc("/images/logo-mary.png")}
+              alt="Mary Salon logo"
+              width={260}
+              height={76}
+              className="h-auto w-[210px] object-contain sm:w-[220px]"
             />
           </Link>
           <p className="mt-5 max-w-sm text-base leading-7 text-white/75">
@@ -39,8 +46,9 @@ export default function Footer() {
           </p>
           <a
             href="tel:+79057747771"
-            className="mt-6 inline-flex items-center rounded-full border border-[#C8A27C]/70 px-5 py-2.5 text-sm font-medium tracking-[0.08em] text-[#C8A27C] transition hover:bg-[#C8A27C] hover:text-[#17181c]"
+            className="mt-6 inline-flex items-center gap-2 rounded-full border border-[#C8A27C]/70 px-5 py-2.5 text-sm font-medium tracking-[0.08em] text-[#C8A27C] transition hover:bg-[#C8A27C] hover:text-[#17181c]"
           >
+            <IconPhone className="h-4 w-4" />
             +7 (905) 774-77-71
           </a>
         </div>
@@ -49,9 +57,10 @@ export default function Footer() {
           <p className="text-xs uppercase tracking-[0.2em] text-[#C8A27C]">Меню</p>
           <ul className="mt-5 space-y-3 text-sm tracking-[0.06em] text-white/80">
             {menuItems.map((item) => (
-              <li key={item}>
-                <a href="#" className="transition hover:text-[#C8A27C]">
-                  {item}
+              <li key={item.label}>
+                <a href={item.href} className="inline-flex items-center gap-2.5 transition hover:text-[#C8A27C]">
+                  <NavIcon icon={item.icon} className="h-4 w-4 shrink-0 text-[#C8A27C]/80" />
+                  {item.label}
                 </a>
               </li>
             ))}
@@ -61,9 +70,22 @@ export default function Footer() {
         <div>
           <p className="text-xs uppercase tracking-[0.2em] text-[#C8A27C]">Контакты</p>
           <ul className="mt-5 space-y-3 text-sm text-white/80">
-            <li>+7 (905) 774-77-71</li>
-            <li>merisalon.info@mail.ru</li>
-            <li>Московская область</li>
+            <li className="flex items-center gap-2.5">
+              <IconPhone className="h-4 w-4 shrink-0 text-[#C8A27C]" />
+              <a href="tel:+79057747771" className="transition hover:text-[#C8A27C]">
+                +7 (905) 774-77-71
+              </a>
+            </li>
+            <li className="flex items-center gap-2.5">
+              <IconMail className="h-4 w-4 shrink-0 text-[#C8A27C]" />
+              <a href="mailto:merisalon.info@mail.ru" className="transition hover:text-[#C8A27C]">
+                merisalon.info@mail.ru
+              </a>
+            </li>
+            <li className="flex items-center gap-2.5">
+              <IconMapPin className="h-4 w-4 shrink-0 text-[#C8A27C]" />
+              Московская область
+            </li>
             <li className="pt-1">
               <a
                 href={MAX_CHANNEL_URL}
@@ -81,14 +103,32 @@ export default function Footer() {
         <div>
           <p className="text-xs uppercase tracking-[0.2em] text-[#C8A27C]">Часы работы</p>
           <ul className="mt-5 space-y-3 text-sm text-white/80">
-            <li>Пн - Сб: 10:00 - 21:00</li>
-            <li>Воскресенье: 10:00 - 20:00</li>
+            <li className="flex items-start gap-2.5">
+              <IconClock className="mt-0.5 h-4 w-4 shrink-0 text-[#C8A27C]" />
+              Пн - Вс: 10:00-21:00
+            </li>
           </ul>
         </div>
       </div>
 
-      <div className="border-t border-white/10 py-4 text-center text-xs uppercase tracking-[0.16em] text-white/60">
-        © 2026 Meri Salon. Все права защищены.
+      <div className="border-t border-white/10 px-4 py-4 text-center text-xs text-white/60">
+        <p className="flex flex-wrap items-center justify-center gap-x-2 gap-y-1 uppercase tracking-[0.16em]">
+          <span>© 2026 Mary Salon. Все права защищены.</span>
+          <span className="text-white/35" aria-hidden>
+            ·
+          </span>
+          <span className="normal-case tracking-[0.06em]">
+            Website Created by{" "}
+            <a
+              href="https://www.vcode.am"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-medium text-[#C8A27C] transition hover:text-white"
+            >
+              VCode
+            </a>
+          </span>
+        </p>
       </div>
     </footer>
   );

@@ -4,12 +4,14 @@ import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
+import { IconPhone, NavIcon, type NavIconKey } from "@/components/icons";
+import { assetSrc } from "@/lib/asset";
 
-const navItems = [
-  { label: "ГЛАВНАЯ", href: "#home" },
-  { label: "СПЕЦИАЛИСТЫ", href: "#specialists" },
-  { label: "НАШИ УСЛУГИ", href: "#services" },
-  { label: "О НАС", href: "#addresses" },
+const navItems: { label: string; href: string; icon: NavIconKey }[] = [
+  { label: "ГЛАВНАЯ", href: "#home", icon: "home" },
+  { label: "СПЕЦИАЛИСТЫ", href: "#specialists", icon: "specialists" },
+  { label: "НАШИ УСЛУГИ", href: "#services", icon: "services" },
+  { label: "О НАС", href: "#addresses", icon: "about" },
 ];
 const MAX_CHANNEL_URL = "https://max.ru/join/UKql4nt2EjTfvB3tjLf_eQdc73JDijmCgTkAizkpSQM";
 
@@ -30,18 +32,18 @@ export default function Header() {
   return (
     <header className="fixed inset-x-0 top-0 z-50 border-b border-gray-100 bg-white">
       <div className="mx-auto hidden w-full max-w-[1300px] xl:block">
-        <div className="grid h-[104px] grid-cols-[190px_minmax(0,1fr)_auto] items-center gap-4 px-6 lg:px-8">
+        <div className="grid h-[104px] grid-cols-[220px_minmax(0,1fr)_auto] items-center gap-4 px-6 lg:px-8">
           <Link
             href="/"
-            className="inline-flex w-[190px] items-center"
-            aria-label="Meri Salon"
+            className="inline-flex w-[220px] items-center"
+            aria-label="Mary Salon"
           >
             <Image
-              src="/images/mary-logo.png"
+              src={assetSrc("/images/logo-mary.png")}
               alt="Mary Salon logo"
-              width={220}
-              height={62}
-              className="h-auto w-[170px] object-contain"
+              width={260}
+              height={72}
+              className="h-auto w-[200px] object-contain"
               priority
             />
           </Link>
@@ -51,8 +53,9 @@ export default function Header() {
               <a
                 key={item.label}
                 href={item.href}
-                className="inline-flex h-10 items-center rounded-full px-3 text-sm font-medium transition hover:bg-[#f8f2ec] hover:text-[#C8A27C]"
+                className="inline-flex h-10 items-center gap-2 rounded-full px-3 text-sm font-medium transition hover:bg-[#f8f2ec] hover:text-[#C8A27C]"
               >
+                <NavIcon icon={item.icon} className="h-4 w-4 shrink-0 opacity-80" />
                 {item.label}
               </a>
             ))}
@@ -64,12 +67,7 @@ export default function Header() {
               className="inline-flex h-10 shrink-0 items-center gap-2 rounded-full border border-[#e4cfb8] bg-white px-3.5 text-sm font-semibold leading-none text-[#1A1B1E] shadow-[0_10px_20px_-18px_rgba(0,0,0,0.45)] transition hover:border-[#C8A27C]"
             >
               <span className="flex h-6 w-6 items-center justify-center rounded-full bg-[#C8A27C] text-white shadow-sm">
-                <svg viewBox="0 0 24 24" className="h-3.5 w-3.5" fill="none" stroke="currentColor">
-                  <path
-                    d="M14.5 20c-6.1 0-10.5-4.4-10.5-10.5 0-.8.1-1.5.3-2.2A1.7 1.7 0 0 1 6.1 6h2a1.7 1.7 0 0 1 1.7 1.5l.2 1.7a1.7 1.7 0 0 1-.5 1.4l-1 1c.9 1.9 2.4 3.4 4.3 4.3l1-1a1.7 1.7 0 0 1 1.4-.5l1.7.2a1.7 1.7 0 0 1 1.5 1.7v2a1.7 1.7 0 0 1-1.3 1.8c-.7.2-1.4.3-2.2.3Z"
-                    strokeWidth="1.4"
-                  />
-                </svg>
+                <IconPhone className="h-3.5 w-3.5" strokeWidth={1.4} />
               </span>
               <span className="whitespace-nowrap text-sm font-semibold tracking-[0.02em]">
                 +7 (905) 774-77-71
@@ -92,14 +90,14 @@ export default function Header() {
         <Link
           href="/"
           className="inline-flex items-center"
-          aria-label="Meri Salon"
+          aria-label="Mary Salon"
         >
           <Image
-            src="/images/mary-logo.png"
+            src={assetSrc("/images/logo-mary.png")}
             alt="Mary Salon logo"
-            width={140}
-            height={42}
-            className="h-auto w-[120px] object-contain"
+            width={168}
+            height={50}
+            className="h-auto w-[142px] object-contain sm:w-[150px]"
             priority
           />
         </Link>
@@ -139,12 +137,14 @@ export default function Header() {
                   key={item.label}
                   href={item.href}
                   onClick={() => setMenuOpen(false)}
-                  className="hover:text-[#C8A27C]"
+                  className="inline-flex items-center gap-3 hover:text-[#C8A27C]"
                 >
+                  <NavIcon icon={item.icon} className="h-4 w-4 shrink-0 opacity-70" />
                   {item.label}
                 </a>
               ))}
-              <a href="tel:+79057747771" className="pt-4 text-[#C8A27C]">
+              <a href="tel:+79057747771" className="inline-flex items-center gap-2 pt-4 text-[#C8A27C]">
+                <IconPhone className="h-4 w-4" />
                 +7 (905) 774-77-71
               </a>
               <a
@@ -156,9 +156,6 @@ export default function Header() {
                 <MaxLogo />
                 <span className="text-xs uppercase tracking-[0.12em]">MAX · Перейти в канал</span>
               </a>
-              <button className="mt-4 rounded-md bg-[#C8A27C] px-6 py-3 text-xs tracking-[0.15em] text-white">
-                ЗАПИСАТЬСЯ
-              </button>
             </div>
           </motion.div>
         ) : null}

@@ -4,31 +4,17 @@ import Image from "next/image";
 import { AnimatePresence, motion } from "framer-motion";
 import { useCallback, useEffect, useState } from "react";
 import { galleryPhotos } from "@/constants/data";
-
-const VISIBLE_COUNT = 4;
-
-function IconChevron({ className, direction }: { className?: string; direction: "left" | "right" }) {
-  return (
-    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
-      {direction === "left" ? (
-        <path d="M15 6l-6 6 6 6" strokeLinecap="round" strokeLinejoin="round" />
-      ) : (
-        <path d="M9 6l6 6-6 6" strokeLinecap="round" strokeLinejoin="round" />
-      )}
-    </svg>
-  );
-}
+import { IconChevron } from "@/components/icons";
+import { assetSrc } from "@/lib/asset";
+import { GALLERY_VISIBLE_BREAKPOINTS, useBreakpointCount } from "@/lib/useBreakpointCount";
 
 export default function Gallery() {
-  const visibleCount = VISIBLE_COUNT;
+  const visibleCount = useBreakpointCount(GALLERY_VISIBLE_BREAKPOINTS);
   const [slideIndex, setSlideIndex] = useState(0);
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
 
   const maxSlide = Math.max(0, galleryPhotos.length - visibleCount);
-
-  useEffect(() => {
-    setSlideIndex((i) => Math.min(i, maxSlide));
-  }, [maxSlide]);
+  const effectiveSlideIndex = Math.min(slideIndex, maxSlide);
 
   const slidePrev = () => setSlideIndex((i) => Math.max(0, i - 1));
   const slideNext = () => setSlideIndex((i) => Math.min(maxSlide, i + 1));
@@ -63,37 +49,35 @@ export default function Gallery() {
   const trackWidthPercent = (galleryPhotos.length / visibleCount) * 100;
 
   return (
-    <section id="gallery" aria-labelledby="gallery-heading" className="relative bg-[#f3f3f3] py-14 sm:py-16 lg:py-20">
+    <section id="gallery" aria-labelledby="gallery-heading" className="relative bg-[#f3f3f3] py-12 sm:py-16 lg:py-20">
       <div className="floral absolute -right-8 top-16 h-44 w-44 opacity-35" aria-hidden />
 
-      <div className="mx-auto w-full max-w-[1300px] px-6">
-        <motion.div
+      <div className="mx-auto w-full max-w-[1300px] px-4 sm:px-6">
+        <motion.header
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-40px" }}
           transition={{ duration: 0.55 }}
-          className="mb-8 flex flex-col gap-3 sm:mb-10 lg:flex-row lg:items-end lg:justify-between"
+          className="mb-6 flex flex-col gap-2 sm:mb-10 sm:gap-3 lg:flex-row lg:items-end lg:justify-between"
         >
           <div className="flex min-w-0 items-center gap-4 sm:gap-5">
             <span className="hidden h-14 w-px shrink-0 bg-[#C8A27C]/70 sm:block" />
-            <h2
-              id="gallery-heading"
-              className="font-body text-[clamp(1.75rem,5vw,3rem)] font-semibold uppercase leading-tight tracking-[0.04em] text-[#1A1B1E]"
-            >
+            <h2 id="gallery-heading" className="section-heading">
               Галерея салона
             </h2>
           </div>
-          <p className="max-w-md text-base leading-6 text-gray-500">
-            Листайте фотографии стрелками — в ряд 4 снимка.
+          <p className="text-sm leading-6 text-[#5c5650] sm:text-base">
+            <span className="lg:hidden">Листайте стрелками — крупные фото салона.</span>
+            <span className="hidden lg:inline">Листайте фотографии стрелками.</span>
           </p>
-        </motion.div>
+        </motion.header>
 
         <div className="relative">
           <button
             type="button"
             onClick={slidePrev}
-            disabled={slideIndex === 0}
-            className="absolute -left-2 top-1/2 z-10 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-[#e6ddd3] bg-white text-[#8f735c] shadow-md transition hover:border-[#C8A27C] hover:text-[#C8A27C] disabled:pointer-events-none disabled:opacity-35 sm:-left-5 lg:h-12 lg:w-12"
+            disabled={effectiveSlideIndex === 0}
+            className="absolute left-0 top-[42%] z-10 flex h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full border-2 border-[#e8e0d6] bg-white text-[#8f735c] shadow-[0_8px_24px_-8px_rgba(26,22,18,0.2)] transition hover:border-[#C8A27C] hover:text-[#C8A27C] disabled:pointer-events-none disabled:opacity-35 sm:left-1 sm:h-12 sm:w-12 lg:-left-5 lg:h-12 lg:w-12"
             aria-label="Предыдущие фото"
           >
             <IconChevron direction="left" className="h-5 w-5" />
@@ -102,40 +86,40 @@ export default function Gallery() {
           <button
             type="button"
             onClick={slideNext}
-            disabled={slideIndex >= maxSlide}
-            className="absolute -right-2 top-1/2 z-10 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-[#e6ddd3] bg-white text-[#8f735c] shadow-md transition hover:border-[#C8A27C] hover:text-[#C8A27C] disabled:pointer-events-none disabled:opacity-35 sm:-right-5 lg:h-12 lg:w-12"
+            disabled={effectiveSlideIndex >= maxSlide}
+            className="absolute right-0 top-[42%] z-10 flex h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full border-2 border-[#e8e0d6] bg-white text-[#8f735c] shadow-[0_8px_24px_-8px_rgba(26,22,18,0.2)] transition hover:border-[#C8A27C] hover:text-[#C8A27C] disabled:pointer-events-none disabled:opacity-35 sm:right-1 sm:h-12 sm:w-12 lg:-right-5 lg:h-12 lg:w-12"
             aria-label="Следующие фото"
           >
             <IconChevron direction="right" className="h-5 w-5" />
           </button>
 
-          <div className="overflow-hidden px-8 sm:px-10" aria-live="polite">
+          <div className="overflow-hidden px-14 sm:px-16 lg:px-12" aria-live="polite">
             <motion.ul
-              className="flex list-none gap-3 p-0 sm:gap-4"
+              className="flex list-none gap-4 p-0 sm:gap-5 lg:gap-4"
               style={{ width: `${trackWidthPercent}%` }}
-              animate={{ x: `-${slideIndex * slideStepPercent}%` }}
+              animate={{ x: `-${effectiveSlideIndex * slideStepPercent}%` }}
               transition={{ type: "spring", stiffness: 280, damping: 32 }}
             >
               {galleryPhotos.map((photo, index) => (
-                <li
-                  key={photo.src}
-                  className="shrink-0"
-                  style={{ width: `${slideStepPercent}%` }}
-                >
+                <li key={photo.src} className="shrink-0" style={{ width: `${slideStepPercent}%` }}>
                   <button
                     type="button"
                     onClick={() => setLightboxIndex(index)}
-                    className="group relative block w-full overflow-hidden rounded-[20px] border border-[#e6ddd3] bg-white shadow-[0_12px_28px_-22px_rgba(0,0,0,0.4)] transition-all duration-300 hover:-translate-y-0.5 hover:border-[#d4b896] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#C8A27C] focus-visible:ring-offset-2"
-                    aria-label={`Открыть: ${photo.alt}`}
+                    className="group relative block w-full overflow-hidden rounded-2xl border-2 border-[#e8e0d6] bg-white shadow-[0_16px_40px_-20px_rgba(26,22,18,0.35)] transition-all duration-300 hover:-translate-y-1 hover:border-[#d4b896] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#C8A27C] focus-visible:ring-offset-2 sm:rounded-[22px] lg:rounded-[20px]"
+                    aria-label={`Открыть фото ${index + 1}`}
                   >
-                    <span className="relative block aspect-[4/5] w-full overflow-hidden">
+                    <span className="relative block aspect-[4/5] w-full overflow-hidden sm:aspect-[5/6] lg:aspect-[4/5]">
                       <Image
-                        src={photo.src}
-                        alt={photo.alt}
+                        src={assetSrc(photo.src)}
+                        alt=""
                         fill
-                        sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
-                        className="object-cover object-center transition-transform duration-500 group-hover:scale-[1.04]"
-                        priority={index < visibleCount}
+                        sizes="(max-width: 639px) 100vw, (max-width: 1023px) 50vw, 25vw"
+                        className="object-cover object-center transition-transform duration-500 group-hover:scale-[1.03]"
+                        priority={index < 2}
+                      />
+                      <span
+                        className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#1A1B1E]/35 via-transparent to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+                        aria-hidden
                       />
                     </span>
                   </button>
@@ -144,17 +128,17 @@ export default function Gallery() {
             </motion.ul>
           </div>
 
-          <div className="mt-6 flex items-center justify-center gap-2">
+          <div className="mt-5 flex items-center justify-center gap-2 sm:mt-6">
             {Array.from({ length: maxSlide + 1 }, (_, i) => (
               <button
                 key={i}
                 type="button"
                 onClick={() => setSlideIndex(i)}
                 className={`h-2 rounded-full transition-all ${
-                  i === slideIndex ? "w-8 bg-[#C8A27C]" : "w-2 bg-[#dccfbf] hover:bg-[#C8A27C]/60"
+                  i === effectiveSlideIndex ? "w-8 bg-[#C8A27C]" : "w-2 bg-[#dccfbf] hover:bg-[#C8A27C]/60"
                 }`}
                 aria-label={`Слайд ${i + 1}`}
-                aria-current={i === slideIndex ? "true" : undefined}
+                aria-current={i === effectiveSlideIndex ? "true" : undefined}
               />
             ))}
           </div>
@@ -166,7 +150,7 @@ export default function Gallery() {
           <motion.div
             role="dialog"
             aria-modal="true"
-            aria-label={activePhoto.alt}
+            aria-label={`Фото ${lightboxIndex + 1}`}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -218,8 +202,8 @@ export default function Gallery() {
               <div className="relative mx-auto h-[min(70vh,640px)] w-full overflow-hidden rounded-2xl border border-white/10 bg-[#f8f4ef] shadow-2xl sm:rounded-[28px]">
                 <Image
                   key={activePhoto.src}
-                  src={activePhoto.src}
-                  alt={activePhoto.alt}
+                  src={assetSrc(activePhoto.src)}
+                  alt=""
                   fill
                   sizes="(max-width: 1280px) 100vw, 1024px"
                   className="object-contain p-2 sm:p-4"
@@ -227,7 +211,6 @@ export default function Gallery() {
                 />
               </div>
 
-              <p className="mt-4 text-center text-sm text-white/75">{activePhoto.alt}</p>
             </motion.div>
           </motion.div>
         ) : null}

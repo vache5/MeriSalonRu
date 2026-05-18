@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { IconStar, IconUsers } from "@/components/icons";
 
 const reviews = [
   {
@@ -20,15 +21,6 @@ const reviews = [
   },
 ];
 
-function IconUser({ className }: { className?: string }) {
-  return (
-    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.9" aria-hidden>
-      <path d="M20 21a8 8 0 0 0-16 0" strokeLinecap="round" />
-      <circle cx="12" cy="8" r="3.5" />
-    </svg>
-  );
-}
-
 export default function LandingSixReviews() {
   return (
     <section className="relative overflow-hidden bg-[#f3f3f3] py-16 sm:py-20">
@@ -43,9 +35,16 @@ export default function LandingSixReviews() {
         >
           <div className="flex items-center gap-5">
             <span className="h-14 w-px bg-[#C8A27C]/70" />
-            <h2 className="font-body text-4xl font-semibold uppercase tracking-wide text-[#1A1B1E] sm:text-5xl">
-              Отзывы клиентов
-            </h2>
+            <div>
+              <div className="mb-2 flex gap-0.5 text-[#C8A27C]" aria-hidden>
+                {Array.from({ length: 5 }).map((_, i) => (
+                  <IconStar key={i} className="h-4 w-4 fill-current" />
+                ))}
+              </div>
+              <h2 className="section-heading">
+                Отзывы клиентов
+              </h2>
+            </div>
           </div>
           <p className="max-w-md text-base leading-6 text-gray-500">
             Узнайте, что наши гости говорят о салоне Mary, качестве сервиса и профессионализме
@@ -65,7 +64,7 @@ export default function LandingSixReviews() {
               <div className="border-b border-[#edd8c6] bg-[#fffdfa] px-5 py-4">
                 <div className="flex items-center gap-3.5">
                   <span className="inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-[#dcc3ad] bg-gradient-to-b from-[#fbf4ed] to-[#f1e4d6] text-[#9f7754] shadow-[inset_0_1px_0_rgba(255,255,255,0.75)]">
-                    <IconUser className="h-5.5 w-5.5" />
+                    <IconUsers className="h-5 w-5" />
                   </span>
                   <h3 className="font-body text-[2rem] font-semibold uppercase leading-none text-[#1A1B1E] sm:text-[2.15rem]">
                     {review.name}

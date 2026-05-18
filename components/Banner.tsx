@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { IconMapPin, IconPhone } from "@/components/icons";
 
 const swirlSvg =
   "url(\"data:image/svg+xml,%3Csvg width='160' height='160' viewBox='0 0 120 120' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%23C8A27C' stroke-width='1.15'%3E%3Cpath d='M12 86c18-8 26-21 33-37 9-20 23-34 47-42'/%3E%3Cpath d='M54 47c0 12 8 18 18 20'/%3E%3Cpath d='M40 61c-2 10-8 15-16 18'/%3E%3Ccircle cx='78' cy='22' r='7'/%3E%3Ccircle cx='59' cy='49' r='5'/%3E%3C/g%3E%3C/svg%3E\")";
@@ -8,26 +9,6 @@ const swirlSvg =
 const MAP_QUERY =
   "https://yandex.ru/maps/?text=" +
   encodeURIComponent("ул. Главного Конструктора В.И. Адасько, 9, Истра");
-
-function IconMapPin({ className }: { className?: string }) {
-  return (
-    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" aria-hidden>
-      <path d="M12 21s7-4.35 7-10a7 7 0 1 0-14 0c0 5.65 7 10 7 10Z" strokeLinejoin="round" />
-      <circle cx="12" cy="11" r="2.25" />
-    </svg>
-  );
-}
-
-function IconPhone({ className }: { className?: string }) {
-  return (
-    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" aria-hidden>
-      <path
-        d="M14.5 20c-6.1 0-10.5-4.4-10.5-10.5 0-.8.1-1.5.3-2.2A1.7 1.7 0 0 1 6.1 6h2a1.7 1.7 0 0 1 1.7 1.5l.2 1.7a1.7 1.7 0 0 1-.5 1.4l-1 1c.9 1.9 2.4 3.4 4.3 4.3l1-1a1.7 1.7 0 0 1 1.4-.5l1.7.2a1.7 1.7 0 0 1 1.5 1.7v2a1.7 1.7 0 0 1-1.3 1.8c-.7.2-1.4.3-2.2.3Z"
-        strokeLinejoin="round"
-      />
-    </svg>
-  );
-}
 
 export default function Banner() {
   return (
@@ -114,7 +95,7 @@ export default function Banner() {
                 <div className="rounded-2xl border border-[#ead8c8] bg-gradient-to-b from-[#fffdfb] to-[#faf3eb] p-4 text-left shadow-[inset_0_1px_0_rgba(255,255,255,0.85)]">
                   <p className="text-[11px] font-semibold uppercase tracking-[0.12em] text-[#8f735c]">1-я процедура</p>
                   <p className="mt-1 font-body text-2xl font-semibold tabular-nums text-[#1A1B1E] sm:text-3xl">
-                    4000&nbsp;<span className="text-lg font-semibold sm:text-xl">₽</span>
+                    4500&nbsp;<span className="text-lg font-semibold sm:text-xl">₽</span>
                   </p>
                   <p className="mt-2 inline-flex rounded-full bg-[#C8A27C]/15 px-2.5 py-1 text-[11px] font-medium text-[#7a5538]">
                     −40% на первое посещение
@@ -123,7 +104,7 @@ export default function Banner() {
                 <div className="rounded-2xl border border-[#ead8c8] bg-gradient-to-b from-[#fffdfb] to-[#faf3eb] p-4 text-left shadow-[inset_0_1px_0_rgba(255,255,255,0.85)]">
                   <p className="text-[11px] font-semibold uppercase tracking-[0.12em] text-[#8f735c]">Абонемент ×5</p>
                   <p className="mt-1 font-body text-2xl font-semibold tabular-nums text-[#1A1B1E] sm:text-3xl">
-                    17&nbsp;000&nbsp;<span className="text-lg font-semibold sm:text-xl">₽</span>
+                    19&nbsp;000&nbsp;<span className="text-lg font-semibold sm:text-xl">₽</span>
                   </p>
                   <p className="mt-2 text-[12px] leading-snug text-[#5c5248]">С учётом скидки 15% на пакет из 5 процедур.</p>
                 </div>

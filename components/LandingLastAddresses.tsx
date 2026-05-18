@@ -2,7 +2,8 @@
 
 import { motion } from "framer-motion";
 import { useState } from "react";
-import type { SalonKey } from "@/components/FourthLanding";
+import { IconMapPin } from "@/components/icons";
+import { SALONS, type SalonKey } from "@/constants/salonPriceList";
 
 const salonData: Record<
   SalonKey,
@@ -43,7 +44,7 @@ export default function LandingLastAddresses() {
         >
           <div className="flex items-center gap-5">
             <span className="h-14 w-px bg-[#C8A27C]/70" />
-            <h2 className="font-body text-5xl font-semibold uppercase tracking-wide text-[#1A1B1E]">
+            <h2 className="section-heading">
               Адреса наших салонов
             </h2>
           </div>
@@ -56,35 +57,28 @@ export default function LandingLastAddresses() {
             transition={{ duration: 0.6 }}
             className="space-y-4"
           >
-            <button
-              type="button"
-              onClick={() => setActiveSalon("kryukovo")}
-              className={`w-full rounded-2xl border px-6 py-5 text-left transition ${
-                activeSalon === "kryukovo"
-                  ? "border-[#C8A27C] bg-[#f8f1ea] shadow-[0_12px_25px_-20px_rgba(0,0,0,0.45)]"
-                  : "border-[#e7d6c7] bg-white hover:border-[#C8A27C]/70"
-              }`}
-            >
-              <p className="text-2xl font-semibold uppercase tracking-[0.06em] text-[#1A1B1E]">КРЮЧКОВО</p>
-              <p className="mt-2 text-base leading-7 text-gray-600">
-                МО, Городской округ Истра, д. Крючково, ул. Радости, д. 4
-              </p>
-            </button>
-
-            <button
-              type="button"
-              onClick={() => setActiveSalon("istra")}
-              className={`w-full rounded-2xl border px-6 py-5 text-left transition ${
-                activeSalon === "istra"
-                  ? "border-[#C8A27C] bg-[#f8f1ea] shadow-[0_12px_25px_-20px_rgba(0,0,0,0.45)]"
-                  : "border-[#e7d6c7] bg-white hover:border-[#C8A27C]/70"
-              }`}
-            >
-              <p className="text-2xl font-semibold uppercase tracking-[0.06em] text-[#1A1B1E]">ИСТРА</p>
-              <p className="mt-2 text-base leading-7 text-gray-600">
-                МО, г. Истра, ул. Адасько, д. 9, второй этаж
-              </p>
-            </button>
+            {SALONS.map(({ key }) => {
+              const data = salonData[key];
+              const selected = activeSalon === key;
+              return (
+                <button
+                  key={key}
+                  type="button"
+                  onClick={() => setActiveSalon(key)}
+                  className={`w-full rounded-2xl border px-6 py-5 text-left transition ${
+                    selected
+                      ? "border-[#C8A27C] bg-[#f8f1ea] shadow-[0_12px_25px_-20px_rgba(0,0,0,0.45)]"
+                      : "border-[#e7d6c7] bg-white hover:border-[#C8A27C]/70"
+                  }`}
+                >
+                  <p className="flex items-center gap-2 text-2xl font-semibold uppercase tracking-[0.06em] text-[#1A1B1E]">
+                    <IconMapPin className="h-5 w-5 shrink-0 text-[#C8A27C]" />
+                    {data.title}
+                  </p>
+                  <p className="mt-2 pl-7 text-base leading-7 text-gray-600">{data.fullAddress}</p>
+                </button>
+              );
+            })}
           </motion.div>
 
           <motion.div
@@ -96,7 +90,10 @@ export default function LandingLastAddresses() {
           >
             <div className="border-b border-[#f0e2d5] px-5 py-4">
               <p className="text-xs uppercase tracking-[0.14em] text-[#C8A27C]">Сейчас выбран</p>
-              <p className="mt-1 text-2xl font-semibold text-[#1A1B1E]">{active.title}</p>
+              <p className="mt-1 flex items-center gap-2 text-2xl font-semibold text-[#1A1B1E]">
+                <IconMapPin className="h-5 w-5 shrink-0 text-[#C8A27C]" />
+                {active.title}
+              </p>
               <p className="mt-1 text-sm text-gray-500">{active.fullAddress}</p>
             </div>
             <iframe
